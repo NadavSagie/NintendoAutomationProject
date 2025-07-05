@@ -54,12 +54,10 @@ class HomePage(BasePage):
 
     def click_support(self):
         self.click(self._SUPPORT)
+        self.page.click(".sc-12ilsja-0.afISW")
 
     def get_support_text(self):
         return self.page.inner_text(self._SUPPORT_HOME)
-
-    def my_account(self):
-        self.click(self._ACCOUNT)
 
     def change_language(self):
         self.click(self._LANGUAGES)
@@ -88,10 +86,12 @@ class HomePage(BasePage):
         return self.page.inner_text(self._SEARCH_FIRST_RESULT_TITLE)
 
     def click_wish_list(self):
-        self.click(self._WISH_LIST)
+        self.page.wait_for_selector(self._WISH_LIST)
+        self.page.locator(self._WISH_LIST).first.click()
 
     def click_my_account(self):
         self.click(self._ACCOUNT)
+        self.page.click(".sc-12ilsja-0.afISW")
 
     def click_sign_up(self):
         self.click(self._ACCOUNT)

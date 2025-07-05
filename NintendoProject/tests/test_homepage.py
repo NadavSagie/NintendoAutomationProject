@@ -40,7 +40,7 @@ class Test1(BaseTest):
     def test_08_nintendo_search_pokemon_game_max_40(self):
         self.home_page.click_start_shopping()
         self.shop.click_games()
-        self.shop_games.click_shop_all()
+        self.shop_games.scroll_to_shop()
         self.shop_games.search_pokemon_game_price_max_40()
         max_40_msg = self.shop_games.max_40_filter()
         assert max_40_msg == "$20 - $39.99"

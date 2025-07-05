@@ -4,8 +4,8 @@ import allure
 @allure.epic("Nintendo Home Page Tests")
 class TestHomePage(BaseTest):
 
-    def setup_method(self):
-        self.page.goto("https://www.nintendo.com/us/")
+    #def setup_method(self):
+        #self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Click Explore tab and validate text")
     def test_click_explore(self):
@@ -40,7 +40,7 @@ class TestHomePage(BaseTest):
     @allure.title("Click Wishlist")
     def test_click_wishlist(self):
         self.home_page.click_wish_list()
-        assert "wishlist" in self.page.url
+        assert "wish-list" in self.page.url
 
     @allure.title("Click Cart")
     def test_click_cart(self):

@@ -4,8 +4,8 @@ import allure
 @allure.epic("Nintendo Characters Tests")
 class TestCharacters(BaseTest):
 
-    def setup_method(self):
-        self.page.goto("https://www.nintendo.com/us/")
+    #def setup_method(self):
+     #   self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Click Super Mario Character")
     def test_click_super_mario(self):
@@ -72,11 +72,11 @@ class TestCharacters(BaseTest):
     def test_click_all_characters_validation(self):
         characters = [
             (self.characters.click_super_mario, "mario"),
-            (self.characters.click_zelda, "link"),
+            (self.characters.click_zelda, "zelda"),
             (self.characters.click_splatoon, "splatoon"),
             (self.characters.click_kirby, "kirby"),
             (self.characters.click_pikmin, "pikmin"),
-            (self.characters.click_animal_crossing, "animal-crossing"),
+            (self.characters.click_animal_crossing, "animalcrossing"),
             (self.characters.click_metroid, "metroid"),
             (self.characters.click_pokemon, "pokemon")
         ]
@@ -84,6 +84,7 @@ class TestCharacters(BaseTest):
             self.page.goto("https://www.nintendo.com/us/")
             click_func()
             assert keyword in self.page.url.lower()
+
 
     @allure.title("Validate no error on all character clicks")
     def test_all_clicks_no_errors(self):

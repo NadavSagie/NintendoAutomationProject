@@ -7,16 +7,21 @@ class ShopGames(BasePage):
 
     _NINTENDO_SWITCH_2   = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(1)"
     _GENRES = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(2)"
-    _FEATURED = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(3)"
-    _CHARACTERS = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(4)"
+    _FEATURED = "div:nth-child(2) div.OIFpM div:nth-child(3)"
+    _CHARACTERS = "div:nth-child(2) div.OIFpM div:nth-child(4)"
+    _BEST_SELLERS = "div:nth-child(2) div.OIFpM div:nth-child(5)"
+    _COMING_SOON = "div:nth-child(2) div.OIFpM div:nth-child(6)"
+    _VERIFY_COMING_SOON = ".sc-14s4g00-7 > h1"
+    _NEW_RELEASES = "div:nth-child(2) div.OIFpM div:nth-child(7)"
+    _VERIFY_NEW_RELEASES = "div.sc-14s4g00-2.jKoniT > h1"
     _CHARACTERS_MARIO = "#games-with-nintendo-characters div:nth-child(1) > a"
+    _VERIFY_SUPER_MARIO = "div.sc-14s4g00-2.jKoniT > h1"
     _CHARACTERS_ZELDA = "#games-with-nintendo-characters div:nth-child(2) > a"
+    _VERIFY_ZELDA = "div.sc-14s4g00-2.jKoniT > h1"
     _CHARACTERS_KIRBY = "#games-with-nintendo-characters div:nth-child(3) > a"
     _CHARACTERS_DONKEY_KONG = "#games-with-nintendo-characters div:nth-child(4) > a"
-    _CHARACTERS_PIKACH = "#games-with-nintendo-characters div:nth-child(5) > a"
-    _COMING_SOON = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(5)"
-    _NEW_RELEASES = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(6)"
-    _SHOP_ALL = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(7)"
+    _CHARACTERS_PIKACHU = "#games-with-nintendo-characters div:nth-child(5) > a"
+    _VERIFY_PIKACHU = ".s954l._3TUsN._39p7O.sXEHt"
     _TABLE_SHOP_CLEAR_ALL_BUTTON = ".kAkyvX > div > button"
     _TABLE_SHOP_TYPE_DEALS = "div:nth-child(19) [aria-label='Deals']:"
     _TABLE_SHOP_TYPE_DEMO_AVAILABLE = "div:nth-child(19) [aria-label='Demo available']"
@@ -24,34 +29,34 @@ class ShopGames(BasePage):
     _TABLE_SHOP_TYPE_GAMES_VOUCHER = "div:nth-child(19) [aria-label='Game Voucher eligible']"
     _TABLE_SHOP_TYPE_GAMES_WITH_DLC = "div:nth-child(19) [aria-label='Games with DLC']"
     _TABLE_SHOP_TYPE_UPGRADE_PACK = "div:nth-child(19) [aria-label='Upgrade pack']"
-    _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_TAB = "div > div:nth-child(4) > button > h3"
+    _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_TAB = "h3:has-text('Nintendo Switch Online features')"
     _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_ONLINE_PLAY = "div:nth-child(19) [aria-label='Online play']"
     _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_SAVE_DATA_CLOUD = "div:nth-child(19) [aria-label='Save Data Cloud']:"
-    _TABLE_SHOP_PLATFORM_TAB = "div > div:nth-child(5) > button > h3"
+    _TABLE_SHOP_PLATFORM_TAB = "h3:has-text('Platform')"
     _TABLE_SHOP_PLATFORM_IOS_ANDROID = "div:nth-child(19) [aria-label='iOS / Android']"
-    _TABLE_SHOP_PLATFORM_NINTENDO_SWITCH = "div:nth-child(19) [aria-label='Nintendo Switch']"
-    _TABLE_SHOP_PLATFORM_NINTENDO_SWITCH_2 = "div:nth-child(19) [aria-label='Nintendo Switch 2']"
-    _TABLE_SHOP_CHARACTERS_OF_SERIES_TAB = "div > div:nth-child(11) > button > h3"
+    _TABLE_SHOP_PLATFORM_NINTENDO_SWITCH = "input[aria-label='Nintendo Switch']"
+    _TABLE_SHOP_PLATFORM_NINTENDO_SWITCH_2 = "input[aria-label='Nintendo Switch 2']"
+    _TABLE_SHOP_CHARACTERS_OF_SERIES_TAB = "h3:has-text('Character or series')"
     _TABLE_SHOP_PLATFORM_SHOW_MORE_BUTTON = ".kAkyvX > div > div.sc-1at2kvx-0.cslSfM > div > div > button"
-    _TABLE_SHOP_CHARACTERS_ANIMAL_CROSSING = "div:nth-child(19) [aria-label='Animal Crossing']"
-    _TABLE_SHOP_CHARACTERS_BOWSER = "div:nth-child(19) [aria-label='Bowser']"
-    _TABLE_SHOP_CHARACTERS_DIDDY_KONG = "div:nth-child(19) [aria-label='Diddy Kong']"
-    _TABLE_SHOP_CHARACTERS_DONKEY_KONG = "div:nth-child(19) [aria-label='Donkey Kong']"
-    _TABLE_SHOP_CHARACTERS_FIRE_EMBLEM = "div:nth-child(19) [aria-label='Fire Emblem']"
-    _TABLE_SHOP_CHARACTERS_KIRBY = "div:nth-child(19) [aria-label='Kirby']"
-    _TABLE_SHOP_CHARACTERS_LINK = "div:nth-child(19) [aria-label='Link']"
-    _TABLE_SHOP_CHARACTERS_LUIGI = "div:nth-child(19) [aria-label='Luigi']"
-    _TABLE_SHOP_CHARACTERS_MARIO = "div:nth-child(19) [aria-label='Mario']"
-    _TABLE_SHOP_CHARACTERS_POKEMON = "[aria-label='Pokémon']"
-    _TABLE_SHOP_CHARACTERS_TLO_ZELDA = "div:nth-child(19) [aria-label='The Legend of Zelda']"
-    _TABLE_SHOP_CHARACTERS_ZELDA = "div:nth-child(19) [aria-label='Zelda']"
-    _TABLE_SHOP_PRICE_TAB = "div > div:nth-child(12) > button > h3"
-    _TABLE_SHOP_PRICE_FREE = "div:nth-child(19) [aria-label='Free to start']"
-    _TABLE_SHOP_PRICE_0_5 = "div:nth-child(19) [aria-label='$0 - $4.99']"
-    _TABLE_SHOP_PRICE_5_10 = "div:nth-child(19) [aria-label='$5 - $9.99']"
-    _TABLE_SHOP_PRICE_10_20 = "div:nth-child(19) [aria-label='$10 - $19.99']"
-    _TABLE_SHOP_PRICE_20_40 = "div:nth-child(19) [aria-label='$20 - $39.99']"
-    _TABLE_SHOP_PRICE_40_PLUS = "div:nth-child(19) [aria-label='$40+']"
+    _TABLE_SHOP_CHARACTERS_ANIMAL_CROSSING = "input[aria-label='Animal Crossing']"
+    _TABLE_SHOP_CHARACTERS_BOWSER = "input[aria-label='Bowser']"
+    _TABLE_SHOP_CHARACTERS_DIDDY_KONG = "input[aria-label='Diddy Kong']"
+    _TABLE_SHOP_CHARACTERS_DONKEY_KONG = "input[aria-label='Donkey Kong']"
+    _TABLE_SHOP_CHARACTERS_FIRE_EMBLEM = "input[aria-label='Fire Emblem']"
+    _TABLE_SHOP_CHARACTERS_KIRBY = "input[aria-label='Kirby']"
+    _TABLE_SHOP_CHARACTERS_LINK = "input[aria-label='Link']"
+    _TABLE_SHOP_CHARACTERS_LUIGI = "input[aria-label='Luigi']"
+    _TABLE_SHOP_CHARACTERS_MARIO = "input[aria-label='Mario']"
+    _TABLE_SHOP_CHARACTERS_POKEMON = "input[aria-label='Pokémon']"
+    _TABLE_SHOP_CHARACTERS_TLO_ZELDA = "input[aria-label='The Legend of Zelda']"
+    _TABLE_SHOP_CHARACTERS_ZELDA = "input[aria-label='Zelda']"
+    _TABLE_SHOP_PRICE_TAB = "h3:has-text('Price')"
+    _TABLE_SHOP_PRICE_FREE = "input[aria-label='Free to start']"
+    _TABLE_SHOP_PRICE_0_5 = "input[aria-label='$0 - $4.99']"
+    _TABLE_SHOP_PRICE_5_10 = "input[aria-label='$5 - $9.99']"
+    _TABLE_SHOP_PRICE_10_20 = "input[aria-label='$10 - $19.99']"
+    _TABLE_SHOP_PRICE_20_40 = "input[aria-label='$20 - $39.99']"
+    _TABLE_SHOP_PRICE_40_PLUS = "input[aria-label='$40+']"
     _MAX_40_MSG = "div > button:nth-child(3) > span.ZovBS"
 
     def click_nintendo_switch_2(self):
@@ -69,11 +74,17 @@ class ShopGames(BasePage):
     def click_coming_soon(self):
         self.click(self._COMING_SOON)
 
+    def verify_coming_soon(self):
+        return self.page.inner_text(self._VERIFY_COMING_SOON)
+
     def click_new_releases(self):
         self.click(self._NEW_RELEASES)
 
-    def click_shop_all(self):
-        self.click(self._SHOP_ALL)
+    def verify_new_releases(self):
+        return self.page.inner_text(self._VERIFY_NEW_RELEASES)
+
+    def scroll_to_shop(self):
+        self.page.evaluate("""window.scrollTo(0, document.body.scrollHeight * 0.4)""")
 
     def click_table_clear_all(self):
         self.click(self._TABLE_SHOP_CLEAR_ALL_BUTTON)
@@ -108,8 +119,14 @@ class ShopGames(BasePage):
     def click_characters_mario(self):
         self.click(self._CHARACTERS_MARIO)
 
+    def verify_super_mario(self):
+        return self.page.inner_text(self._VERIFY_SUPER_MARIO)
+
     def click_characters_zelda(self):
         self.click(self._CHARACTERS_ZELDA)
+
+    def verify_zelda(self):
+        return self.page.inner_text(self._VERIFY_ZELDA)
 
     def click_characters_kirby(self):
         self.click(self._CHARACTERS_KIRBY)
@@ -118,7 +135,10 @@ class ShopGames(BasePage):
         self.click(self._CHARACTERS_DONKEY_KONG)
 
     def click_characters_pikachu(self):
-        self.click(self._CHARACTERS_PIKACH)
+        self.click(self._CHARACTERS_PIKACHU)
+
+    def verify_pikachu(self):
+        return self.page.inner_text(self._VERIFY_PIKACHU)
 
     def click_table_platform_tab(self):
         self.click(self._TABLE_SHOP_PLATFORM_TAB)
@@ -127,10 +147,10 @@ class ShopGames(BasePage):
         self.click(self._TABLE_SHOP_PLATFORM_IOS_ANDROID)
 
     def click_table_platform_nintendo_switch(self):
-        self.click(self._TABLE_SHOP_PLATFORM_NINTENDO_SWITCH)
+        self.page.locator(self._TABLE_SHOP_PLATFORM_NINTENDO_SWITCH).first.click()
 
     def click_table_platform_nintendo_switch_2(self):
-        self.click(self._TABLE_SHOP_PLATFORM_NINTENDO_SWITCH_2)
+        self.page.locator(self._TABLE_SHOP_PLATFORM_NINTENDO_SWITCH_2).first.click()
 
     def click_table_characters_of_series_tab(self):
         self.click(self._TABLE_SHOP_CHARACTERS_OF_SERIES_TAB)
@@ -139,7 +159,7 @@ class ShopGames(BasePage):
         self.click(self._TABLE_SHOP_PLATFORM_SHOW_MORE_BUTTON)
 
     def click_table_characters_animal_crossing(self):
-        self.click(self._TABLE_SHOP_CHARACTERS_ANIMAL_CROSSING)
+        self.page.locator(self._TABLE_SHOP_CHARACTERS_ANIMAL_CROSSING).first.click()
 
     def click_table_characters_bowser(self):
         self.click(self._TABLE_SHOP_CHARACTERS_BOWSER)
@@ -187,16 +207,16 @@ class ShopGames(BasePage):
         self.click(self._TABLE_SHOP_PRICE_5_10)
 
     def click_table_price_10_20(self):
-        self.click(self._TABLE_SHOP_PRICE_10_20)
+        self.page.locator(self._TABLE_SHOP_PRICE_10_20).first.click()
 
     def click_table_price_20_40(self):
-        self.click(self._TABLE_SHOP_PRICE_20_40)
+        self.page.locator(self._TABLE_SHOP_PRICE_20_40).first.click()
 
     def click_table_price_40_plus(self):
         self.click(self._TABLE_SHOP_PRICE_40_PLUS)
 
     def search_pokemon_game_price_max_40(self):
-        self.click_shop_all()
+        self.scroll_to_shop()
         self.click_table_platform_tab()
         self.click_table_platform_nintendo_switch()
         self.click_table_characters_of_series_tab()
