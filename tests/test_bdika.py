@@ -1,4 +1,5 @@
 import time
+from time import sleep
 
 from tests.base_test import BaseTest
 import allure
@@ -23,7 +24,8 @@ class TestBdika(BaseTest):
 
     @allure.title("Click Start Shopping")
     def test_click_start_shopping(self):
-        self.home_page.click_start_shopping()
+        with self.page.expect_navigation():
+            self.home_page.click_start_shopping()
         assert "store" in self.page.url
 
     @allure.title("Click Cart")
@@ -57,6 +59,128 @@ class TestBdika(BaseTest):
         self.home_page.scroll_to_bottom_and_top()
         assert "new-releases" in self.page.url
         self.home_page.click_home_btn()
+
+    @allure.title("Click Super Mario Character")
+    def test_click_super_mario(self):
+        self.characters.click_super_mario()
+        assert "mario" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Zelda Character")
+    def test_click_zelda(self):
+        self.characters.click_zelda()
+        assert "zelda" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Splatoon Character")
+    def test_click_splatoon(self):
+        self.characters.click_splatoon()
+        assert "splatoon" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Kirby Character")
+    def test_click_kirby(self):
+        self.characters.click_kirby()
+        assert "kirby" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Pikmin Character")
+    def test_click_pikmin(self):
+        self.characters.click_pikmin()
+        assert "pikmin" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Animal Crossing Character")
+    def test_click_animal_crossing(self):
+        self.characters.click_animal_crossing()
+        assert "animalcrossing" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Metroid Character")
+    def test_click_metroid(self):
+        self.characters.click_metroid()
+        assert "metroid" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Pokemon Character")
+    def test_click_pokemon(self):
+        self.characters.click_pokemon()
+        assert "pokemon" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Mario then back to Characters page")
+    def test_click_mario_and_return(self):
+        self.characters.click_super_mario()
+        self.page.go_back()
+        assert "nintendo" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click Zelda then back")
+    def test_click_zelda_and_return(self):
+        self.characters.click_zelda()
+        self.page.go_back()
+        assert "nintendo" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click multiple characters in sequence")
+    def test_click_multiple_characters(self):
+        self.characters.click_kirby()
+        self.page.go_back()
+        self.characters.click_pikmin()
+        self.page.go_back()
+        self.characters.click_metroid()
+        assert "metroid" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
+
+    @allure.title("Click all characters and validate each")
+    def test_click_all_characters_validation(self):
+        characters = [
+            (self.characters.click_super_mario, "mario"),
+            (self.characters.click_zelda, "zelda"),
+            (self.characters.click_splatoon, "splatoon"),
+            (self.characters.click_kirby, "kirby"),
+            (self.characters.click_pikmin, "pikmin"),
+            (self.characters.click_animal_crossing, "animalcrossing"),
+            (self.characters.click_metroid, "metroid"),
+            (self.characters.click_pokemon, "pokemon")
+        ]
+        for click_func, keyword in characters:
+            click_func()
+            assert keyword in self.page.url.lower()
+            sleep(3)
+            self.page.go_back()
+
+    @allure.title("Validate no error on all character clicks")
+    def test_all_clicks_no_errors(self):
+        self.characters.click_super_mario()
+        self.page.go_back()
+        self.characters.click_zelda()
+        self.page.go_back()
+        self.characters.click_splatoon()
+        self.page.go_back()
+        self.characters.click_kirby()
+        self.page.go_back()
+        self.characters.click_pikmin()
+        self.page.go_back()
+        self.characters.click_animal_crossing()
+        self.page.go_back()
+        self.characters.click_metroid()
+        self.page.go_back()
+        self.characters.click_pokemon()
+        assert "pokemon" in self.page.url.lower()
+        sleep(3)
+        self.page.go_back()
 
     @allure.title("Click Gaming Systems")
     def test_click_gaming_systems(self):
