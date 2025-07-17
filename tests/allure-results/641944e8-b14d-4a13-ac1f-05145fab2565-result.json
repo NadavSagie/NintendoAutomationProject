@@ -1,0 +1,1 @@
+{"name": "Try underage sign up", "status": "passed", "start": 1752746854185, "stop": 1752746871918, "uuid": "d534c0ca-2d68-4797-892e-f2121d48fdb7", "testCaseId": "2a75e32a160e759f04227d95b7357ce5", "fullName": "tests.test_sign_up.TestSignUp#test_underage_sign_up_block"}

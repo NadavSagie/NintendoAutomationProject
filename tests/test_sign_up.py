@@ -4,8 +4,8 @@ import allure
 @allure.epic("Nintendo Sign Up Tests")
 class TestSignUp(BaseTest):
 
-    def setup_method(self):
-        self.page.goto("https://www.nintendo.com/us/")
+    #def setup_method(self):
+        #self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Open Sign Up from account menu")
     def test_open_sign_up(self):
@@ -32,6 +32,12 @@ class TestSignUp(BaseTest):
         self.sign_up.select_option(self.sign_up._SIGN_UP_YEAR, "2000")
         self.sign_up.click(self.sign_up._SIGN_UP_SUBMIT)
         assert "sign" in self.page.content().lower()
+
+    @allure.title("Full Short Sign-Up Flow - Expected Error")
+    def test_sign_up(self):
+        self.sign_up.sign_up_short_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
+        error = self.sign_up.account_sign_up_error()
+        assert "error" in error.lower()
 
     @allure.title("Full Sign-Up Flow - Expected Error")
     def test_sign_up_with_invalid_email(self):
@@ -64,8 +70,8 @@ class TestSignUp(BaseTest):
         self.sign_up.click(self.sign_up._ACCOUNT_OVER_16)
         self.sign_up.fill_text(self.sign_up._SIGN_UP_NICKNAME, "noCheckTest")
         self.sign_up.fill_text(self.sign_up._SIGN_UP_EMAIL, "test@testing.com")
-        self.sign_up.fill_text(self.sign_up._SIGN_UP_PASSWORD, "Test1234")
-        self.sign_up.fill_text(self.sign_up._SIGN_UP_CONFIRM_PASSWORD, "Test1234")
+        self.sign_up.fill_text(self.sign_up._SIGN_UP_PASSWORD, "Blue1234")
+        self.sign_up.fill_text(self.sign_up._SIGN_UP_CONFIRM_PASSWORD, "Blue1234")
         self.sign_up.select_option(self.sign_up._SIGN_UP_COUNTRY, "Israel")
         self.sign_up.select_option(self.sign_up._SIGN_UP_TIME_ZONE, "142")
         self.sign_up.click(self.sign_up._SIGN_UP_CONTINUE_BUTTON)
