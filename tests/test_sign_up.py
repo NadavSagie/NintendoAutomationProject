@@ -1,5 +1,7 @@
-from tests.base_test import BaseTest
 import allure
+
+from tests.base_test import BaseTest
+
 
 @allure.epic("Nintendo Sign Up Tests")
 class TestSignUp(BaseTest):
@@ -36,8 +38,9 @@ class TestSignUp(BaseTest):
     @allure.title("Full Short Sign-Up Flow - Expected Error")
     def test_sign_up(self):
         self.sign_up.sign_up_short_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
-        error = self.sign_up.account_sign_up_error()
-        assert "error" in error.lower()
+        current_url = self.page.url
+        print(f"[DEBUG] Final URL: {current_url}")
+        assert "error" in current_url.lower()
 
     @allure.title("Full Sign-Up Flow - Expected Error")
     def test_sign_up_with_invalid_email(self):

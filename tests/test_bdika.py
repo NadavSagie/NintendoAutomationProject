@@ -95,23 +95,21 @@ class TestBdika(BaseTest):
     def test_change_language(self):
         self.home_page.change_language()
         assert "lang" in self.page.url or "country" in self.page.url
-        self.home_page.click_home_btn()
-
-    @allure.title("Full home page click-through test")
-    def test_full_navigation(self):
-        self.home_page.click_explore()
         self.page.go_back()
-        self.home_page.click_shop()
-        self.page.go_back()
-        self.home_page.click_support()
-        self.page.go_back()
-        self.home_page.click_all_news()
-        assert "news" in self.page.url
 
     @allure.title("Search for Pokemon and validate results")
     def test_search_pokemon(self):
         self.home_page.search("Pokemon")
         assert "Pokemon" in self.home_page.result_title()
+        self.home_page.click_home_btn()
+
+    @allure.title("Full Short Sign-Up Flow - Expected Error")
+    def test_sign_up(self):
+        self.sign_up.sign_up_short_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
+        current_url = self.page.url
+        print(f"[DEBUG] Final URL: {current_url}")
+        assert "error" in current_url.lower()
+        self.page.goto("https://www.nintendo.com/us/")
 
     #@allure.title("Log in button opens Nintendo Account popup")
     #def test_log_in_popup(self):

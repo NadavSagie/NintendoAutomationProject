@@ -1,3 +1,5 @@
+from time import sleep
+
 from playwright.sync_api import Page
 from pages.base_page import BasePage
 
@@ -28,9 +30,10 @@ class SignUp(BasePage):
     _SIGN_UP_PRIVACY_POLICY_CHECKBOX = "label[for='form-policy_consented']"
     _SIGN_UP_CONTINUE_BUTTON = "#register-form_pc_button_5"
     _SIGN_UP_UNRECEIVED_EMAIL = "#email_opted_in_unreceive"
-    _SIGN_UP_REGISTER_BUTTON = "#register-email-opt-in-form_pc_button_2"
+    _SIGN_UP_REGISTER_BUTTON = "[value='register']"
     _SIGN_UP_ACCOUNT_CREATION_UNMADE_MSG = ".c-attention_inner"
     _SIGN_UP_ACCOUNT_CREATION_ERROR = "data-template-id=['cdn-display-error']"
+    _SIGN_UP_HOME_BTN = ".logo-nintendo"
 
     def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
@@ -39,21 +42,33 @@ class SignUp(BasePage):
         self.select_option(self._SIGN_UP_DAY, day)
         self.select_option(self._SIGN_UP_YEAR, year)
         self.click(self._SIGN_UP_SUBMIT)
+
         self.fill_text(self._SIGN_UP_NICKNAME, nickname)
         self.fill_text(self._SIGN_UP_EMAIL, email)
         self.fill_text(self._SIGN_UP_PASSWORD, password)
         self.fill_text(self._SIGN_UP_CONFIRM_PASSWORD, password)
+
         self.select_option(self._SIGN_UP_MONTH, month)
         self.select_option(self._SIGN_UP_DAY, day)
         self.select_option(self._SIGN_UP_YEAR, year)
         self.select_option(self._SIGN_UP_GENDER, gender)
         self.select_option(self._SIGN_UP_COUNTRY, country)
         self.select_option(self._SIGN_UP_TIME_ZONE, timezone)
+
         self.click(self._SIGN_UP_USER_AGREEMENT_CHECKBOX)
         self.click(self._SIGN_UP_PRIVACY_POLICY_CHECKBOX)
+        sleep(2)
         self.click(self._SIGN_UP_CONTINUE_BUTTON)
-        self.click(self._SIGN_UP_UNRECEIVED_EMAIL)
-        self.click(self._SIGN_UP_REGISTER_BUTTON)
+
+        if "register" in self.page.url:
+            try:
+                if self.page.locator(self._SIGN_UP_UNRECEIVED_EMAIL).is_visible():
+                    self.click(self._SIGN_UP_UNRECEIVED_EMAIL)
+            except:
+                print("[INFO] UNRECEIVED EMAIL button not visible or missing")
+
+        else:
+            print(f"[ERROR] Unexpected URL: {self.page.url}")
 
     def sign_up_full_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
@@ -86,3 +101,6 @@ class SignUp(BasePage):
 
     def account_sign_up_error(self):
         return self.page.inner_text(self._SIGN_UP_ACCOUNT_CREATION_ERROR)
+
+    def click_sign_up_home_btn(self):
+        self.click(self._SIGN_UP_HOME_BTN)

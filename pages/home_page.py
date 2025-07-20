@@ -41,13 +41,6 @@ class HomePage(BasePage):
     _SHOP_CHARACTERS = " a:nth-child(6) > span.sc-1k9k6ch-2.clfwsO"
     _SHOP_NINTENDO_STORE = "._5jHgU"
     _VERIFY_WHATSNEW = " div.sc-wswg5a-0.byNSlr > h1"
-    #_MENU = "[aria-label='Open']"
-    #_MENU_HOME = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(1)"
-    #_MENU_FEATURES = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(2)"
-    #_MENU_GAMECHAT = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(3)"
-    #_MENU_GAMES = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(4)"
-    #_MENU_ACCESSORIES = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(5)"
-    #_MENU_HOW_TO_BUY = "div.Switch2Wrapper_subNavLinkContainer__BZxk8 > div:nth-child(6)"
 
     def click_explore(self):
         self.click(self._EXPLORE)
