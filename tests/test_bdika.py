@@ -94,7 +94,7 @@ class TestBdika(BaseTest):
     @allure.title("Language Change Navigation")
     def test_change_language(self):
         self.home_page.change_language()
-        assert "lang" in self.page.url or "country" in self.page.url
+        assert "region" in self.page.url
         self.page.go_back()
 
     @allure.title("Search for Pokemon and validate results")
