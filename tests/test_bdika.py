@@ -1,4 +1,5 @@
 import time
+from asyncio import wait_for
 from time import sleep
 
 from tests.base_test import BaseTest
@@ -53,12 +54,25 @@ class TestBdika(BaseTest):
         assert "best-sellers" in self.page.url
         self.home_page.click_home_btn()
 
-    @allure.title("Click New Releases")
-    def test_click_new_releases(self):
-        self.home_page.click_digital_new_releases()
-        self.home_page.scroll_to_bottom_and_top()
-        assert "new-releases" in self.page.url
+    @allure.title("Click Best Sellers_Test")
+    def test_test_click_best_sellers(self):
+        self.home_page.click_best_sellers()
+        self.shop_games.click_table_platform_tab()
+        self.shop_games.click_table_platform_nintendo_switch()
+        self.shop_games.click_table_price_tab()
+        self.shop_games.click_table_price_10_20()
+        sleep(1)
+        self.home_page.scroll_page("down", 30, 9000, 1)
+        self.shop_games.click_by_name("SpongeBob: Krusty Cook-Off")
+        sleep(2)
+        self.page.go_back()
+        sleep(2)
+        self.home_page.scroll_page("up", 30, 9000, 0)
+        self.shop_games.click_by_name("DOOM")
+        assert "best-sellers" in self.page.url
         self.home_page.click_home_btn()
+
+
 
     @allure.title("Click all characters and validate each")
     def test_click_all_characters_validation(self):
