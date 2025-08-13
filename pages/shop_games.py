@@ -56,8 +56,11 @@ class ShopGames(BasePage):
     _TABLE_SHOP_PRICE_5_10 = "input[aria-label='$5 - $9.99']"
     _TABLE_SHOP_PRICE_10_20 = "input[aria-label='$10 - $19.99']"
     _TABLE_SHOP_PRICE_20_40 = "input[aria-label='$20 - $39.99']"
-    _TABLE_SHOP_PRICE_40_PLUS = "input[aria-label='$40+']"
-    _MAX_40_MSG = "div > button:nth-child(3) > span.ZovBS"
+    _TABLE_SHOP_PRICE_40_PLUS = "section:has(h3:has-text('Price')) input[aria-label='$40+']"
+    _THIRD_TAG = "div > button:nth-child(3) > span.ZovBS"
+    _TABLE_SHOP_FIRST_RESULT = ".sc-1dskkk7-3.ljMhgM > div:nth-child(1)"
+    _RESULTS = ".sc-1dskkk7-3.ljMhgM > div"
+
 
     def click_nintendo_switch_2(self):
         self.click(self._NINTENDO_SWITCH_2)
@@ -225,6 +228,24 @@ class ShopGames(BasePage):
         self.click_table_price_tab()
         self.click_table_price_20_40()
 
-    def max_40_filter(self):
-        return self.page.inner_text(self._MAX_40_MSG)
+    def search_pokemon_game_price_over_40(self):
+         self.scroll_to_shop()
+         self.click_table_platform_tab()
+         self.click_table_platform_nintendo_switch()
+         self.click_table_characters_of_series_tab()
+         self.click_table_platform_show_more()
+         self.click_table_characters_pokemon()
+         self.click_table_price_tab()
+         self.click_table_price_40_plus()
 
+    def third_tag_filter(self):
+        return self.page.inner_text(self._THIRD_TAG)
+
+    def click_first_result(self):
+        self.click(self._TABLE_SHOP_FIRST_RESULT)
+
+    def click_by_name(self, name: str, timeout: int = 5000):
+        item = self.page.locator(self._RESULTS).filter(has_text=name).first
+        item.wait_for(state="visible", timeout=timeout)
+        item.scroll_into_view_if_needed(timeout=timeout)
+        item.click(timeout=timeout)

@@ -165,6 +165,73 @@ class HomePage(BasePage):
                 }
             """)
 
+    def scroll_page(self, direction: str = "down", percent: float = 50.0, duration_ms: int = 12000, stops: int = 2,
+                    dwell_ms: int = 1250):
+        self.page.evaluate(
+            """
+            ({ direction, percent, duration, stops, dwell }) => new Promise((resolve) => {
+                const dir = (String(direction || "down").toLowerCase() === "up") ? "up" : "down";
+                const doc = document.documentElement, body = document.body;
+
+                const scrollHeight = Math.max(doc.scrollHeight, body.scrollHeight);
+                const startY  = window.scrollY || window.pageYOffset || 0;
+                const delta   = Math.max(0, scrollHeight * (Math.max(0, percent) / 100));
+                const maxY    = Math.max(0, scrollHeight - window.innerHeight);
+                const endY    = dir === "down" ? Math.min(startY + delta, maxY) : Math.max(startY - delta, 0);
+
+                // יעדי ביניים (waypoints): תחנות עצירה + יעד סופי
+                const stopsCount = Math.max(0, Math.floor(stops || 0));
+                const waypoints = [startY];
+                for (let i = 1; i <= stopsCount; i++) {
+                    const frac = i / (stopsCount + 1);
+                    waypoints.push(dir === "down" ? startY + delta * frac : startY - delta * frac);
+                }
+                waypoints.push(endY);
+
+                if (waypoints.length <= 1 || startY === endY) { resolve(); return; }
+
+                // חלוקת הזמן שווה בין המקטעים
+                const segDuration = Math.max(1, Math.floor(duration / (waypoints.length - 1)));
+                const dwellTime   = Math.max(0, dwell);
+
+                const easeInOut = (t) => (t < 0.5) ? (2 * t * t) : (1 - Math.pow(-2 * t + 2, 2) / 2);
+
+                let segIndex = 0;
+
+                const animateSegment = () => {
+                    const y0 = waypoints[segIndex];
+                    const y1 = waypoints[segIndex + 1];
+                    const distance = y1 - y0;
+                    const t0 = performance.now();
+
+                    const step = (now) => {
+                        const t = Math.min(1, (now - t0) / segDuration);
+                        const y = y0 + distance * easeInOut(t);
+                        window.scrollTo(0, y);
+                        if (t < 1) {
+                            requestAnimationFrame(step);
+                        } else {
+                            segIndex++;
+                            if (segIndex < waypoints.length - 1) {
+                                if (dwellTime > 0) {
+                                    setTimeout(() => requestAnimationFrame(animateSegment), dwellTime);
+                                } else {
+                                    requestAnimationFrame(animateSegment);
+                                }
+                            } else {
+                                resolve();
+                            }
+                        }
+                    };
+                    requestAnimationFrame(step);
+                };
+
+                requestAnimationFrame(animateSegment);
+            })
+            """,
+            {"direction": direction, "percent": percent, "duration": duration_ms, "stops": stops, "dwell": dwell_ms}
+        )
+
     def click_digital_new_releases(self):
         self.click(self._DIGITAL_NEW_RELEASES)
         time.sleep(1)
