@@ -1,0 +1,1 @@
+{"name": "Click My Account", "status": "passed", "start": 1768043904766, "stop": 1768043905769, "uuid": "07a65d89-e005-4650-9d62-e5c445465341", "testCaseId": "0633cd452a5e0281bd6522d8275b06c5", "fullName": "tests.test_bdika.TestBdika#test_click_my_account", "titlePath": ["tests", "test_bdika.py", "TestBdika"]}

@@ -1,0 +1,1 @@
+{"name": "Click Support tab and validate title", "status": "passed", "start": 1768043870818, "stop": 1768043874970, "uuid": "4c73d6e2-1f98-494f-8d6d-6d6196dd4013", "testCaseId": "a861464b3be11e0dd96c8d1769d134f4", "fullName": "tests.test_bdika.TestBdika#test_click_support", "titlePath": ["tests", "test_bdika.py", "TestBdika"]}
