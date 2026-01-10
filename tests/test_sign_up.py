@@ -1,5 +1,4 @@
 import allure
-
 from tests.base_test import BaseTest
 
 

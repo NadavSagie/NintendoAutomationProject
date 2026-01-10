@@ -1,5 +1,4 @@
 from time import sleep
-
 from tests.base_test import BaseTest
 import allure
 
@@ -79,9 +78,6 @@ class TestShopGames(BaseTest):
     @allure.title("Filter: Characters > Pokemon > Price $20-40")
     def test_filter_pokemon_20_40(self):
         self.shop_games.search_pokemon_game_price_max_40()
-<<<<<<< HEAD
-        assert self.shop_games.max_40_filter() == "$20 - $39.99"
-=======
         self.shop_games.click_first_result()
         assert self.shop_games.third_tag_filter() == "$20 - $39.99"
 
@@ -89,7 +85,6 @@ class TestShopGames(BaseTest):
         self.shop_games.search_pokemon_game_price_over_40()
         assert self.shop_games.third_tag_filter() == "$40+"
         self.shop_games.click_first_result()
->>>>>>> master
 
     @allure.title("Click Save Data Cloud filter")
     def test_click_save_data_cloud_filter(self):
