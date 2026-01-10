@@ -14,7 +14,7 @@ It follows the **Page Object Model (POM)** design pattern for better scalability
 - 📸 Highlighting UI elements during interaction
 - 🚀 Pytest + Allure for rich reporting
 
----
+--- 
 
 ## 📁 Project Structure
 
