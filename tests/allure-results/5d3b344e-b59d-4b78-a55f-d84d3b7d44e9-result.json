@@ -1,1 +1,0 @@
-{"name": "Click News", "status": "passed", "start": 1768043952607, "stop": 1768043952930, "uuid": "c6029a13-8f68-469c-9914-57856731ffd8", "testCaseId": "be213b4ddc6de126f920c42a7a7bb201", "fullName": "tests.test_bdika.TestBdika#test_click_news", "titlePath": ["tests", "test_bdika.py", "TestBdika"]}

@@ -1,1 +1,0 @@
-{"name": "Click Start Shopping", "status": "passed", "start": 1768043615070, "stop": 1768043617361, "uuid": "dc454d4e-f174-417b-9a2d-d9acef60540f", "testCaseId": "5aacfe54060e19134f178cac1bb696e3", "fullName": "tests.test_bdika.TestBdika#test_click_start_shopping", "titlePath": ["tests", "test_bdika.py", "TestBdika"]}
