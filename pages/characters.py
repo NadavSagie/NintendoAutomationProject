@@ -6,14 +6,14 @@ class Characters(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-    _SUPER_MARIO = "[aria-label='Super Mario site']"
-    _ZELDA = "[aria-label='The Legend of Zelda site']"
-    _SPLATOON = "[aria-label='Splatoon site']"
-    _KIRBY = "[aria-label='Kirby site']"
-    _PIKMIN = "[aria-label='Pikmin site']"
-    _ANIMAL_CROSSING = "[aria-label='Animal Crossing site']"
-    METROID = "[aria-label='Metroid site']"
-    _POKEMON = "[aria-label='Pokémon site']"
+    _SUPER_MARIO = "[alt='Super Mario site']"
+    _ZELDA = "[alt='The Legend of Zelda site']"
+    _SPLATOON = "[alt='Splatoon site']"
+    _KIRBY = "[alt='Kirby site']"
+    _PIKMIN = "[alt='Pikmin site']"
+    _ANIMAL_CROSSING = "[alt='Animal Crossing site']"
+    _METROID = "[alt='Metroid site']"
+    _POKEMON = "[alt='Pokémon site']"
 
     def click_super_mario(self):
         self.click(self._SUPER_MARIO)
@@ -34,7 +34,7 @@ class Characters(BasePage):
         self.click(self._ANIMAL_CROSSING)
 
     def click_metroid(self):
-        self.click(self.METROID)
+        self.click(self._METROID)
 
     def click_pokemon(self):
         self.click(self._POKEMON)

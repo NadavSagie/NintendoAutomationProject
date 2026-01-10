@@ -6,6 +6,11 @@ from pages.base_page import BasePage
 class SignUp(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
+        self.new_page = None
+
+    def switch_to_new_page(self):
+        self.page = self.page.context.pages[-1]
+        self.page.wait_for_load_state()
 
     _ACCOUNT = "._9eU-h"
     _ACCOUNT_LOG_IN = ".sc-1h06vbw-0.iDyxyN > button"
@@ -33,6 +38,7 @@ class SignUp(BasePage):
     _SIGN_UP_ACCOUNT_CREATION_UNMADE_MSG = ".c-attention_inner"
     _SIGN_UP_ACCOUNT_CREATION_ERROR = "data-template-id=['cdn-display-error']"
     _SIGN_UP_HOME_BTN = ".logo-nintendo"
+
 
     def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
@@ -72,6 +78,7 @@ class SignUp(BasePage):
     def sign_up_full_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
         self.click(self._ACCOUNT_SIGN_UP)
+        self.switch_to_new_page()
         self.select_option(self._SIGN_UP_MONTH, month)
         self.select_option(self._SIGN_UP_DAY, day)
         self.select_option(self._SIGN_UP_YEAR, year)
