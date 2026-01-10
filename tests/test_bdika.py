@@ -1,5 +1,4 @@
 from time import sleep
-
 from tests.base_test import BaseTest
 import allure
 
@@ -48,7 +47,7 @@ class TestBdika(BaseTest):
     @allure.title("Click Best Sellers")
     def test_click_best_sellers(self):
         self.home_page.click_best_sellers()
-        self.home_page.scroll_to_bottom_and_top()
+        self.home_page.scroll_page()
         assert "best-sellers" in self.page.url
         self.home_page.click_home_btn()
 

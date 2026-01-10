@@ -41,16 +41,22 @@ class HomePage(BasePage):
     _SHOP_CHARACTERS = " a:nth-child(6) > span.sc-1k9k6ch-2.clfwsO"
     _SHOP_NINTENDO_STORE = "._5jHgU"
     _VERIFY_WHATSNEW = " div.sc-wswg5a-0.byNSlr > h1"
+    _CLOSE_EXPLORE = "#explore-panel button > svg"
+    _CLOSE_SHOP = "#shop-panel div > button"
+    _CLOSE_SUPPORT = "#support-panel div > button"
+
+
 
     def click_explore(self):
         self.click(self._EXPLORE)
+        self.click(self._CLOSE_EXPLORE)
 
     def verify_explore(self):
         return self.page.inner_text(self._VERIFY_EXPLORE)
 
     def click_support(self):
         self.click(self._SUPPORT)
-        self.page.click(".sc-12ilsja-0.afISW")
+        self.click(self._CLOSE_SUPPORT)
 
     def get_support_text(self):
         return self.page.inner_text(self._SUPPORT_HOME)
@@ -63,6 +69,7 @@ class HomePage(BasePage):
 
     def click_shop(self):
         self.click(self._SHOP)
+        self.click(self._CLOSE_SHOP)
 
     def get_shop_text(self):
         return self.page.inner_text(self._SHOP_TAB_MSG)

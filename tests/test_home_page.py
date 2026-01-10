@@ -12,15 +12,15 @@ class TestHomePage(BaseTest):
         self.home_page.click_explore()
         assert "Meet the characters:" in self.home_page.verify_explore()
 
-    @allure.title("Click Support tab and validate title")
-    def test_click_support(self):
-        self.home_page.click_support()
-        assert self.home_page.get_support_text() == "Support Home"
-
     @allure.title("Click Shop tab and validate title")
     def test_click_shop(self):
         self.home_page.click_shop()
         assert self.home_page.get_shop_text() == "My Nintendo Store"
+
+    @allure.title("Click Support tab and validate title")
+    def test_click_support(self):
+        self.home_page.click_support()
+        assert self.home_page.get_support_text() == "Support Home"
 
     @allure.title("Search for Pokemon and validate results")
     def test_search_pokemon(self):
