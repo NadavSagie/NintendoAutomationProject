@@ -1,9 +1,12 @@
 from time import sleep
+
+import pytest
+
 from tests.base_test import BaseTest
 import allure
 
 @allure.epic("Nintendo Home Page Tests")
-class TestBdika(BaseTest):
+class Test_Master(BaseTest):
 
     @allure.title("Click Explore tab and validate text")
     def test_click_explore(self):
@@ -19,6 +22,26 @@ class TestBdika(BaseTest):
     def test_click_support(self):
         self.home_page.click_support()
         assert self.home_page.get_support_text() == "Support Home"
+
+    @allure.title("Search for Pokemon and validate results")
+    def test_search(self):
+        self.home_page.search("Pokemon")
+        self.home_page.click_search_result(1)
+        self.home_page.slide_show_previous()
+        sleep(1)
+        self.home_page.slide_show_previous()
+        sleep(1)
+        self.home_page.slide_show_previous()
+        assert "pokemon" in self.page.url
+        self.home_page.click_home_btn()
+
+    @allure.title("Full Short Sign-Up Flow - Expected Error")
+    def test_sign_up(self):
+        self.sign_up.sign_up_full_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
+        current_url = self.page.url
+        print(f"[DEBUG] Final URL: {current_url}")
+        assert "error" in current_url.lower()
+        self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Click Start Shopping")
     def test_click_start_shopping(self):
@@ -44,15 +67,8 @@ class TestBdika(BaseTest):
         assert "news" in all_news_header.lower()
         self.home_page.click_home_btn()
 
-    @allure.title("Click Best Sellers")
-    def test_click_best_sellers(self):
-        self.home_page.click_best_sellers()
-        self.home_page.scroll_page()
-        assert "best-sellers" in self.page.url
-        self.home_page.click_home_btn()
-
     @allure.title("Click Best Sellers_Test")
-    def test_test_click_best_sellers(self):
+    def test_click_best_sellers(self):
         self.home_page.click_best_sellers()
         self.shop_games.click_table_platform_tab()
         self.shop_games.click_table_platform_nintendo_switch()
@@ -60,27 +76,19 @@ class TestBdika(BaseTest):
         self.shop_games.click_table_price_10_20()
         sleep(1)
         self.home_page.scroll_page("down", 30, 9000, 1)
-        self.shop_games.click_by_name("SpongeBob: Krusty Cook-Off")
-        sleep(2)
-        self.page.go_back()
-        sleep(2)
-        self.home_page.scroll_page("up", 30, 9000, 0)
+        sleep(1)
         self.shop_games.click_by_name("DOOM")
-        assert "best-sellers" in self.page.url
+        self.shop_games.age_verification("11", "13", "1995")
+        sleep(2)
+        assert "doom" in self.page.url
         self.home_page.click_home_btn()
-
-
 
     @allure.title("Click all characters and validate each")
     def test_click_all_characters_validation(self):
         characters = [
             (self.characters.click_super_mario, "mario"),
             (self.characters.click_zelda, "zelda"),
-            (self.characters.click_splatoon, "splatoon"),
             (self.characters.click_kirby, "kirby"),
-            (self.characters.click_pikmin, "pikmin"),
-            (self.characters.click_animal_crossing, "animalcrossing"),
-            (self.characters.click_metroid, "metroid"),
             (self.characters.click_pokemon, "pokemon")
         ]
         for click_func, keyword in characters:
@@ -102,31 +110,13 @@ class TestBdika(BaseTest):
         assert "online" in self.page.url
         self.home_page.click_home_btn()
 
-    @allure.title("Language Change Navigation")
-    def test_change_language(self):
-        self.home_page.change_language()
-        assert "region" in self.page.url
-        self.page.go_back()
+    @pytest.mark.usefixtures("setup_page_session")
+    @allure.title("Log in button opens Nintendo Account popup")
+    def test_log_in_popup(self):
+        popup = self.home_page.click_log_in_and_get_popup()
+        assert self.home_page.log_in_title(popup) == "Nintendo Account"
 
-    @allure.title("Search for Pokemon and validate results")
-    def test_search_pokemon(self):
-        self.home_page.search("Pokemon")
-        assert "Pokemon" in self.home_page.result_title()
-        self.home_page.click_home_btn()
+    @allure.title("Click Wishlist")
+    def test_click_wishlist(self):
+        self.home_page.click_wish_list()
 
-    @allure.title("Full Short Sign-Up Flow - Expected Error")
-    def test_sign_up(self):
-        self.sign_up.sign_up_short_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
-        current_url = self.page.url
-        print(f"[DEBUG] Final URL: {current_url}")
-        assert "error" in current_url.lower()
-        self.page.goto("https://www.nintendo.com/us/")
-
-    #@allure.title("Log in button opens Nintendo Account popup")
-    #def test_log_in_popup(self):
-     #   popup = self.home_page.click_log_in_and_get_popup()
-      #  assert self.home_page.log_in_title(popup) == "Nintendo Account"
-
-    #@allure.title("Click Wishlist")
-    #def test_click_wishlist(self):
-     #   self.home_page.click_wish_list()

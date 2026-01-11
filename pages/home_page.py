@@ -15,7 +15,7 @@ class HomePage(BasePage):
     _SHOP_TAB_MSG = ".YSMyD"
     _SEARCH = "#search"
     _SEARCH_LINE = "[data-testid='desktop-nav'] input[placeholder='Search games, hardware, news, etc']"
-    _SEARCH_LINE_RESULT_FIRST = "div:nth-child(1) > div > div > a > div.P0fUB > div.xPhZu > h3"
+    _SEARCH_RESULTS = "#all-tab a"
     _SEARCH_FIRST_RESULT_TITLE = ".sc-qyho57-0.eccGkq > h2"
     _WISH_LIST = "[aria-label='Wish List']"
     _CART = "[aria-label='Cart']"
@@ -44,6 +44,8 @@ class HomePage(BasePage):
     _CLOSE_EXPLORE = "#explore-panel button > svg"
     _CLOSE_SHOP = "#shop-panel div > button"
     _CLOSE_SUPPORT = "#support-panel div > button"
+    _SLIDE_SHOW_NEXT = "[aria-label='Next']"
+    _SLIDE_SHOW_PREVIOUS = "[aria-label='Previous']"
 
 
 
@@ -79,7 +81,7 @@ class HomePage(BasePage):
 
     def search(self, text):
         self.click(self._SEARCH)
-        self.fill_text(self._SEARCH_LINE, "Pokemon")
+        self.type(self._SEARCH_LINE, text)
         self.press(self._SEARCH_LINE, "Enter")
 
     def click_first_search_result(self):
@@ -242,3 +244,14 @@ class HomePage(BasePage):
     def click_digital_new_releases(self):
         self.click(self._DIGITAL_NEW_RELEASES)
         time.sleep(1)
+
+    def click_search_result(self, index: int):
+        result = self.page.locator(self._SEARCH_RESULTS).nth(index)
+        result.wait_for(state="visible")
+        result.click()
+
+    def slide_show_next(self):
+        self.click(self._SLIDE_SHOW_NEXT)
+
+    def slide_show_previous(self):
+        self.click(self._SLIDE_SHOW_PREVIOUS)

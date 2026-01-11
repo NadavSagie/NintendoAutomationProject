@@ -1,3 +1,4 @@
+import time
 from time import sleep
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
 import pytest
@@ -45,9 +46,9 @@ class SignUp(BasePage):
     _SIGN_UP_ACCOUNT_CREATION_UNMADE_MSG = ".c-attention_inner"
     _SIGN_UP_ACCOUNT_CREATION_ERROR = "data-template-id=['cdn-display-error']"
     _SIGN_UP_HOME_BTN = ".logo-nintendo"
+    _CLOSE_SIGN_UP_POP_UP = ".fdzDeK > button"
 
-
-    def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
+    """ def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
 
         self.switch_to_new_page()
@@ -82,7 +83,7 @@ class SignUp(BasePage):
                 print("[INFO] UNRECEIVED EMAIL button not visible or missing")
 
         else:
-            print(f"[ERROR] Unexpected URL: {self.page.url}")
+            print(f"[ERROR] Unexpected URL: {self.page.url}")"""
 
     def sign_up_full_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         main_page = self.page
@@ -121,11 +122,12 @@ class SignUp(BasePage):
             try:
                 if self.page != main_page:
                     self.page.close()
+                    time.sleep(1)
+                self.page = main_page
+                self.click(self._CLOSE_SIGN_UP_POP_UP)
             except Exception:
                 pass
-
             self.page = main_page
-
             pytest.skip(f"Skipped due to Playwright TimeoutError: {e}")
 
     def account_sign_up_not_created_msg(self):

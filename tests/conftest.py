@@ -33,3 +33,21 @@ def setup_page_class(request, browser):
     sleep(1)
     page.close()
     context.close()
+
+@pytest.fixture(scope="session", autouse=False)
+def setup_page_session(request, browser):
+    context = browser.new_context(no_viewport=True)
+    page = context.new_page()
+    page.goto("https://www.nintendo.com/us/")
+    request.session.page = page
+    request.session.home_page = HomePage(page)
+    request.session.characters = Characters(page)
+    request.session.explore = Explore(page)
+    request.session.shop = Shop(page)
+    request.session.shop_games = ShopGames(page)
+    request.session.support = Support(page)
+    request.session.sign_up = SignUp(page)
+    yield
+    sleep(1)
+    page.close()
+    context.close()

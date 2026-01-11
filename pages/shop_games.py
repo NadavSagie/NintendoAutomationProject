@@ -60,7 +60,11 @@ class ShopGames(BasePage):
     _THIRD_TAG = "div > button:nth-child(3) > span.ZovBS"
     _TABLE_SHOP_FIRST_RESULT = ".sc-1dskkk7-3.ljMhgM > div:nth-child(1)"
     _RESULTS = ".sc-1dskkk7-3.ljMhgM > div"
-
+    _AGE_VERIFICATION_MONTH = "[name='month']"
+    _AGE_VERIFICATION_DAY = "[name='day']"
+    _AGE_VERIFICATION_YEAR = "[name='year']"
+    _AGE_VERIFICATION_CONTINUE_BTN = "[name='submit']"
+    _ADD_TO_WISHLIST = ".jSmDNt"
 
     def click_nintendo_switch_2(self):
         self.click(self._NINTENDO_SWITCH_2)
@@ -249,3 +253,15 @@ class ShopGames(BasePage):
         item.wait_for(state="visible", timeout=timeout)
         item.scroll_into_view_if_needed(timeout=timeout)
         item.click(timeout=timeout)
+
+    def age_verification(self, month, day, year):
+        self.fill_text(self._AGE_VERIFICATION_MONTH, month)
+        self.fill_text(self._AGE_VERIFICATION_DAY, day)
+        self.fill_text(self._AGE_VERIFICATION_YEAR, year)
+        self.click(self._AGE_VERIFICATION_CONTINUE_BTN)
+
+    def add_to_wishlist(self):
+        self.click(self._ADD_TO_WISHLIST)
+
+    def hover_add_to_wishlist(self):
+        self.page.hover(self._ADD_TO_WISHLIST)

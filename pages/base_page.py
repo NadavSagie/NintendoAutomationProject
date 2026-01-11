@@ -37,3 +37,9 @@ class BasePage:
         self.page.locator(locator).wait_for(state="visible")
         self.highlight(locator)
         self.page.locator(locator).press(key)
+
+    def type(self, locator, text, delay: int = 50):
+        element = self.page.locator(locator)
+        element.wait_for(state="visible")
+        self.highlight(locator)
+        element.type(text, delay=delay)
