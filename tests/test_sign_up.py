@@ -43,7 +43,7 @@ class TestSignUp(BaseTest):
 
     @allure.title("Full Sign-Up Flow - Expected Error")
     def test_sign_up_with_invalid_email(self):
-        self.sign_up.sign_up_full_process("7", "11", "2000", "tester111", "fake@invalid.com", "Test1234", "male", "Israel", "142")
+        self.sign_up.sign_up_full_process("7", "11", "2000", "tester111", "fake@invalid@.com", "Test1234", "male", "Israel", "142")
         error = self.sign_up.account_sign_up_error()
         assert "error" in error.lower()
 
