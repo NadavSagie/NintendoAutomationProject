@@ -9,7 +9,9 @@ class SignUp(BasePage):
         self.new_page = None
 
     def switch_to_new_page(self):
-        self.page = self.page.context.pages[-1]
+        with self.page.context.expect_page() as page_info:
+            self.click(self._ACCOUNT_SIGN_UP)
+        self.page = page_info.value
         self.page.wait_for_load_state()
 
     _ACCOUNT = "._9eU-h"
@@ -42,7 +44,9 @@ class SignUp(BasePage):
 
     def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
-        self.click(self._ACCOUNT_SIGN_UP)
+
+        self.switch_to_new_page()
+
         self.select_option(self._SIGN_UP_MONTH, month)
         self.select_option(self._SIGN_UP_DAY, day)
         self.select_option(self._SIGN_UP_YEAR, year)
@@ -77,8 +81,9 @@ class SignUp(BasePage):
 
     def sign_up_full_process(self, month, day, year, nickname, email, password, gender, country, timezone):
         self.click(self._ACCOUNT)
-        self.click(self._ACCOUNT_SIGN_UP)
+
         self.switch_to_new_page()
+
         self.select_option(self._SIGN_UP_MONTH, month)
         self.select_option(self._SIGN_UP_DAY, day)
         self.select_option(self._SIGN_UP_YEAR, year)
