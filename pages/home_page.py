@@ -84,9 +84,6 @@ class HomePage(BasePage):
         self.type(self._SEARCH_LINE, text)
         self.press(self._SEARCH_LINE, "Enter")
 
-    def click_first_search_result(self):
-        self.click(self._SEARCH_LINE_RESULT_FIRST)
-
     def result_title(self):
         return self.page.inner_text(self._SEARCH_FIRST_RESULT_TITLE)
 

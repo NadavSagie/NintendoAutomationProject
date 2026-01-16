@@ -68,6 +68,7 @@ class Test_Master(BaseTest):
         self.home_page.click_home_btn()
 
     @allure.title("Click Best Sellers_Test")
+    @pytest.mark.e2e
     def test_click_best_sellers(self):
         self.home_page.click_best_sellers()
         self.shop_games.click_table_platform_tab()
