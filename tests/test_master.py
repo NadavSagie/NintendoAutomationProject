@@ -77,10 +77,13 @@ class Test_Master(BaseTest):
         sleep(1)
         self.home_page.scroll_page("down", 30, 9000, 1)
         sleep(1)
-        self.shop_games.click_by_name("DOOM")
+        self.shop_games.click_by_name("Diablo III")
         self.shop_games.age_verification("11", "13", "1995")
         sleep(2)
-        assert "doom" in self.page.url
+        self.home_page.slide_show_previous()
+        sleep(1)
+        self.home_page.slide_show_previous()
+        assert "diablo" in self.page.url
         self.home_page.click_home_btn()
 
     @allure.title("Click all characters and validate each")
