@@ -30,6 +30,9 @@ class SignUp(BasePage):
     _NINTENDO_HOME_SIGN_UP = "#common-header_pc_a_0"
     _CREATE_NINTENDO_ACCOUNT = "#common-header_pc_a_2"
     _ACCOUNT_UNDER_16 = "#authorize-age-gate_pc_a_0"
+    _PROCEED_BTN = "#child-register-description_pc_a_0"
+    _CREATE_NEW_ACCOUNT_UNDER_16 = "#register-child-support_pc_a_2"
+    _CONFIRM_AND_REGISTER = "#register-email-opt-in-form_pc_button_2"
     _ACCOUNT_OVER_16 = "#authorize-age-gate_pc_a_1"
     _SIGN_UP_NICKNAME = "#register-form_pc_input_0"
     _SIGN_UP_EMAIL = "#email"
@@ -47,50 +50,19 @@ class SignUp(BasePage):
     _SIGN_UP_ACCOUNT_CREATION_ERROR = "data-template-id=['cdn-display-error']"
     _SIGN_UP_HOME_BTN = ".logo-nintendo"
     _CLOSE_SIGN_UP_POP_UP = ".fdzDeK > button"
+    _SIGN_UP_VERIFICATION_MSG = "p.c-pageDescription span"
 
-    """ def sign_up_short_process(self, month, day, year, nickname, email, password, gender, country, timezone):
-        self.click(self._ACCOUNT)
-
-        self.switch_to_new_page()
-
-        self.select_option(self._SIGN_UP_MONTH, month)
-        self.select_option(self._SIGN_UP_DAY, day)
-        self.select_option(self._SIGN_UP_YEAR, year)
-        self.click(self._SIGN_UP_SUBMIT)
-
-        self.fill_text(self._SIGN_UP_NICKNAME, nickname)
-        self.fill_text(self._SIGN_UP_EMAIL, email)
-        self.fill_text(self._SIGN_UP_PASSWORD, password)
-        self.fill_text(self._SIGN_UP_CONFIRM_PASSWORD, password)
-
-        self.select_option(self._SIGN_UP_MONTH, month)
-        self.select_option(self._SIGN_UP_DAY, day)
-        self.select_option(self._SIGN_UP_YEAR, year)
-        self.select_option(self._SIGN_UP_GENDER, gender)
-        self.select_option(self._SIGN_UP_COUNTRY, country)
-        self.select_option(self._SIGN_UP_TIME_ZONE, timezone)
-
-        self.click(self._SIGN_UP_USER_AGREEMENT_CHECKBOX)
-        self.click(self._SIGN_UP_PRIVACY_POLICY_CHECKBOX)
-        sleep(2)
-        self.click(self._SIGN_UP_CONTINUE_BUTTON)
-
-        if "register" in self.page.url:
-            try:
-                if self.page.locator(self._SIGN_UP_UNRECEIVED_EMAIL).is_visible():
-                    self.click(self._SIGN_UP_UNRECEIVED_EMAIL)
-            except:
-                print("[INFO] UNRECEIVED EMAIL button not visible or missing")
-
-        else:
-            print(f"[ERROR] Unexpected URL: {self.page.url}")"""
-
-    def sign_up_full_process(self, month, day, year, nickname, email, password, gender, country, timezone):
+    def _sign_up_full_process(
+            self,
+            age_selector,
+            month, day, year, nickname, email, password, gender, country, timezone,
+            after_age_choice=None
+    ):
         main_page = self.page
-
         try:
             self.click(self._ACCOUNT)
             self.switch_to_new_page()
+
             self.select_option(self._SIGN_UP_MONTH, month)
             self.select_option(self._SIGN_UP_DAY, day)
             self.select_option(self._SIGN_UP_YEAR, year)
@@ -98,9 +70,15 @@ class SignUp(BasePage):
 
             self.click(self._NINTENDO_HOME_SIGN_UP)
             self.click(self._CREATE_NINTENDO_ACCOUNT)
-            self.click(self._ACCOUNT_OVER_16)
 
-            self.fill_text(self._SIGN_UP_NICKNAME, nickname)  # פה נפל אצלך
+            self.click(age_selector)
+
+            if after_age_choice:
+                after_age_choice()
+
+            self.page.locator(self._SIGN_UP_NICKNAME).wait_for(state="visible")
+            self.fill_text(self._SIGN_UP_NICKNAME, nickname)
+
             self.fill_text(self._SIGN_UP_EMAIL, email)
             self.fill_text(self._SIGN_UP_PASSWORD, password)
             self.fill_text(self._SIGN_UP_CONFIRM_PASSWORD, password)
@@ -115,7 +93,13 @@ class SignUp(BasePage):
             self.click(self._SIGN_UP_USER_AGREEMENT_CHECKBOX)
             self.click(self._SIGN_UP_PRIVACY_POLICY_CHECKBOX)
             self.click(self._SIGN_UP_CONTINUE_BUTTON)
-            self.click(self._SIGN_UP_UNRECEIVED_EMAIL)
+
+            try:
+                if self.page.locator(self._SIGN_UP_UNRECEIVED_EMAIL).is_visible():
+                    self.click(self._SIGN_UP_UNRECEIVED_EMAIL)
+            except Exception:
+                print("[INFO] UNRECEIVED EMAIL button not visible or missing")
+
             self.click(self._SIGN_UP_REGISTER_BUTTON)
 
         except PlaywrightTimeoutError as e:
@@ -130,6 +114,23 @@ class SignUp(BasePage):
             self.page = main_page
             pytest.skip(f"Skipped due to Playwright TimeoutError: {e}")
 
+    def sign_up_full_process_over_16(self, month, day, year, nickname, email, password, gender, country, timezone):
+        return self._sign_up_full_process(
+            self._ACCOUNT_OVER_16,
+            month, day, year, nickname, email, password, gender, country, timezone
+        )
+
+    def sign_up_full_process_under_16(self, month, day, year, nickname, email, password, gender, country, timezone):
+        def _under_16_steps():
+            self.click(self._PROCEED_BTN)
+            self.click(self._CREATE_NEW_ACCOUNT_UNDER_16)
+
+        return self._sign_up_full_process(
+            self._ACCOUNT_UNDER_16,
+            month, day, year, nickname, email, password, gender, country, timezone,
+            after_age_choice=_under_16_steps
+        )
+
     def account_sign_up_not_created_msg(self):
         return self.page.inner_text(self._SIGN_UP_ACCOUNT_CREATION_UNMADE_MSG)
 
@@ -138,3 +139,6 @@ class SignUp(BasePage):
 
     def click_sign_up_home_btn(self):
         self.click(self._SIGN_UP_HOME_BTN)
+
+    def get_verification_message_text(self) -> str:
+        return self.page.locator(self._SIGN_UP_VERIFICATION_MSG).inner_text().strip()

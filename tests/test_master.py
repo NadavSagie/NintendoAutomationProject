@@ -35,12 +35,21 @@ class Test_Master(BaseTest):
         assert "pokemon" in self.page.url
         self.home_page.click_home_btn()
 
-    @allure.title("Full Short Sign-Up Flow - Expected Error")
+    @allure.title("Full Sign-Up Flow Over age 16 - Expected Error")
     def test_sign_up(self):
-        self.sign_up.sign_up_full_process("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
+        self.sign_up.sign_up_full_process_over_16("7", "11", "2000", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
         current_url = self.page.url
         print(f"[DEBUG] Final URL: {current_url}")
         assert "error" in current_url.lower()
+        self.page.goto("https://www.nintendo.com/us/")
+
+    @allure.title("Full Sign-Up Flow Under age 16 - Expected Error")
+    def test_sign_up(self):
+        self.sign_up.sign_up_full_process_under_16("7", "11", "2007", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
+        current_url = self.page.url
+        print(f"[DEBUG] Final URL: {current_url}")
+        msg = self.sign_up.get_verification_message_text()
+        assert "verification code has been sent" in msg.lower()
         self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Click Start Shopping")
