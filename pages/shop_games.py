@@ -6,7 +6,7 @@ class ShopGames(BasePage):
         super().__init__(page)
 
     _NINTENDO_SWITCH_2   = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(1)"
-    _GENRES = "div:nth-child(2) > section > div > div > div.OIFpM > div.P8EbW > div > div.sziGh > div:nth-child(2)"
+    _GENRES = "div:nth-child(7) > button > h3"
     _FEATURED = "div:nth-child(2) div.OIFpM div:nth-child(3)"
     _CHARACTERS = "div:nth-child(2) div.OIFpM div:nth-child(4)"
     _BEST_SELLERS = "div:nth-child(2) div.OIFpM div:nth-child(5)"
@@ -30,7 +30,7 @@ class ShopGames(BasePage):
     _TABLE_SHOP_TYPE_GAMES_WITH_DLC = "div:nth-child(19) [aria-label='Games with DLC']"
     _TABLE_SHOP_TYPE_UPGRADE_PACK = "div:nth-child(19) [aria-label='Upgrade pack']"
     _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_TAB = "h3:has-text('Nintendo Switch Online features')"
-    _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_ONLINE_PLAY = "div:nth-child(19) [aria-label='Online play']"
+    _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_ONLINE_PLAY = ".kAkyvX [aria-label='Online Play']"
     _TABLE_SHOP_NINTENDO_ONLINE_FEATURES_SAVE_DATA_CLOUD = "div:nth-child(19) [aria-label='Save Data Cloud']:"
     _TABLE_SHOP_PLATFORM_TAB = "h3:has-text('Platform')"
     _TABLE_SHOP_PLATFORM_IOS_ANDROID = "div:nth-child(19) [aria-label='iOS / Android']"

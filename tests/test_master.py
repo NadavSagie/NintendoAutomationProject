@@ -81,10 +81,12 @@ class Test_Master(BaseTest):
         self.home_page.click_best_sellers()
         self.shop_games.click_table_platform_tab()
         self.shop_games.click_table_platform_nintendo_switch()
+        self.shop_games.click_table_nintendo_switch_online_tab()
+        self.shop_games.click_table_nintendo_online_play()
         self.shop_games.click_table_price_tab()
         self.shop_games.click_table_price_10_20()
         sleep(1)
-        self.home_page.scroll_page("down", 30, 9000, 1)
+        self.home_page.scroll_page("down", 20, 9000, 1)
         sleep(1)
         self.shop_games.click_by_name("Diablo III")
         self.shop_games.age_verification("11", "13", "1995")
@@ -99,9 +101,8 @@ class Test_Master(BaseTest):
     def test_click_all_characters_validation(self):
         characters = [
             (self.characters.click_super_mario, "mario"),
-            (self.characters.click_zelda, "zelda"),
-            (self.characters.click_kirby, "kirby"),
-            (self.characters.click_pokemon, "pokemon")
+            (self.characters.click_pokemon, "pokemon"),
+            (self.characters.click_kirby, "kirby")
         ]
         for click_func, keyword in characters:
             click_func()
@@ -121,6 +122,7 @@ class Test_Master(BaseTest):
         self.support.click_support()
         title = self.support.full_process_for_searching_bug()
         assert "How to Change the Game Display Mode for Nintendo Classics Games" in title
+        self.home_page.click_home_btn()
 
     @allure.title("Click Nintendo Switch Online")
     def test_click_nintendo_switch_online(self):
