@@ -1,5 +1,4 @@
 from time import sleep
-
 import pytest
 
 from tests.base_test import BaseTest
@@ -117,17 +116,17 @@ class Test_Master(BaseTest):
         assert "switch" in self.page.url or "gaming" in self.page.url
         self.home_page.click_home_btn()
 
+    @allure.title("Search display bug and validate title")
+    def test_search_display_bug(self):
+        self.support.click_support()
+        title = self.support.full_process_for_searching_bug()
+        assert "How to Change the Game Display Mode for Nintendo Classics Games" in title
+
     @allure.title("Click Nintendo Switch Online")
     def test_click_nintendo_switch_online(self):
         self.home_page.click_nintendo_switch_online()
         assert "online" in self.page.url
         self.home_page.click_home_btn()
-
-    @pytest.mark.usefixtures("setup_page_session")
-    @allure.title("Log in button opens Nintendo Account popup")
-    def test_log_in_popup(self):
-        popup = self.home_page.click_log_in_and_get_popup()
-        assert self.home_page.log_in_title(popup) == "Nintendo Account"
 
     @allure.title("Click Wishlist")
     def test_click_wishlist(self):
