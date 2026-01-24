@@ -88,7 +88,7 @@ class Test_Master(BaseTest):
         self.home_page.click_home_btn()
 
     @allure.title("Click all characters and validate each")
-    def test_click_all_characters_validation(self):
+    def test_click_characters_validation(self):
         characters = [
             (self.characters.click_super_mario, "mario"),
             (self.characters.click_pokemon, "pokemon"),

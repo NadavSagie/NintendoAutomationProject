@@ -12,7 +12,7 @@ class SignUp(BasePage):
         super().__init__(page)
         self.new_page = None
 
-    def switch_to_new_page(self, timeout_ms: int = 5000):
+    def switch_to_new_page(self, timeout_ms: int = 3000):
         with self.page.context.expect_page() as page_info:
             self.click(self._ACCOUNT_SIGN_UP)
 
