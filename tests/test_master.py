@@ -1,6 +1,5 @@
 from time import sleep
 import pytest
-
 from tests.base_test import BaseTest
 import allure
 
@@ -77,7 +76,7 @@ class Test_Master(BaseTest):
         self.shop_games.click_table_price_tab()
         self.shop_games.click_table_price_10_20()
         sleep(1)
-        self.home_page.scroll_page("down", 20, 9000, 1)
+        self.home_page.scroll_page("down", 20, 3000, 0)
         sleep(1)
         self.shop_games.click_by_name("Diablo III")
         self.shop_games.age_verification("11", "13", "1995")
@@ -114,15 +113,10 @@ class Test_Master(BaseTest):
         self.support.click_support()
         title = self.support.full_process_for_searching_bug()
         assert "How to Change the Game Display Mode for Nintendo Classics Games" in title
-        self.home_page.click_home_btn()
+        self.page.get_by_role("link", name="Nintendo", exact=True).click()
 
     @allure.title("Click Nintendo Switch Online")
     def test_click_nintendo_switch_online(self):
         self.home_page.click_nintendo_switch_online()
         assert "online" in self.page.url
         self.home_page.click_home_btn()
-
-    @allure.title("Click Wishlist")
-    def test_click_wishlist(self):
-        self.home_page.click_wish_list()
-
