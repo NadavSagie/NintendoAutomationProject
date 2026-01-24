@@ -46,6 +46,7 @@ class HomePage(BasePage):
     _CLOSE_SUPPORT = "#support-panel div > button"
     _SLIDE_SHOW_NEXT = "[aria-label='Next']"
     _SLIDE_SHOW_PREVIOUS = "[aria-label='Previous']"
+    _OVERVIEW_TRAILER = "[data-testid='PlayButtonIcon']"
 
 
 
@@ -252,3 +253,11 @@ class HomePage(BasePage):
 
     def slide_show_previous(self):
         self.click(self._SLIDE_SHOW_PREVIOUS)
+
+    def click_overview_trailer(self):
+        self.click(self._OVERVIEW_TRAILER)
+        frame = self.page.frame_locator("[data-testid='youtubeVid']")
+        frame.locator("[aria-label='Play']").click()
+        time.sleep(3)
+        dialog = self.page.get_by_role("dialog")
+        dialog.get_by_label("Close").click()

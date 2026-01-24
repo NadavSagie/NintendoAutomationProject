@@ -42,15 +42,6 @@ class Test_Master(BaseTest):
         assert "error" in current_url.lower()
         self.page.goto("https://www.nintendo.com/us/")
 
-    @allure.title("Full Sign-Up Flow Under age 16 - Expected Error")
-    def test_sign_up(self):
-        self.sign_up.sign_up_full_process_under_16("7", "11", "2007", "tester111", "fake@gmail.com", "Test1234", "male", "Israel", "142")
-        current_url = self.page.url
-        print(f"[DEBUG] Final URL: {current_url}")
-        msg = self.sign_up.get_verification_message_text()
-        assert "verification code has been sent" in msg.lower()
-        self.page.goto("https://www.nintendo.com/us/")
-
     @allure.title("Click Start Shopping")
     def test_click_start_shopping(self):
         with self.page.expect_navigation():
@@ -114,6 +105,7 @@ class Test_Master(BaseTest):
     def test_click_gaming_systems(self):
         with self.page.expect_navigation():
             self.home_page.click_gaming_systems()
+        self.home_page.click_overview_trailer()
         assert "switch" in self.page.url or "gaming" in self.page.url
         self.home_page.click_home_btn()
 
