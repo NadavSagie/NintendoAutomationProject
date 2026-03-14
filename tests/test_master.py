@@ -74,7 +74,7 @@ class Test_Master(BaseTest):
         self.shop_games.click_table_nintendo_switch_online_tab()
         self.shop_games.click_table_nintendo_online_play()
         self.shop_games.click_table_price_tab()
-        self.shop_games.click_table_price_10_20()
+        self.shop_games.click_table_price_40_plus()
         sleep(1)
         self.home_page.scroll_page("down", 20, 3000, 0)
         sleep(1)
