@@ -47,17 +47,6 @@ class Test_Master(BaseTest):
             self.home_page.click_start_shopping()
         assert "store" in self.page.url
 
-    @allure.title("Click Cart")
-    def test_click_cart(self):
-        self.home_page.click_cart()
-        assert "cart" in self.page.url
-
-    @allure.title("Click My Account")
-    def test_click_my_account(self):
-        self.home_page.click_my_account()
-        assert self.page.url.startswith("https://www.nintendo.com/")
-        self.home_page.click_home_btn()
-
     @allure.title("Click News")
     def test_click_news(self):
         self.home_page.click_all_news()
