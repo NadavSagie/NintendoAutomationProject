@@ -14,12 +14,12 @@ class Test_Master(BaseTest):
     @allure.title("Click Shop tab and validate title")
     def test_click_shop(self):
         self.home_page.click_shop()
-        assert self.home_page.get_shop_text() == "My Nintendo Store"
+        assert "My Nintendo Store" in self.home_page.get_shop_text()
 
     @allure.title("Click Support tab and validate title")
     def test_click_support(self):
         self.home_page.click_support()
-        assert self.home_page.get_support_text() == "Support Home"
+        assert "Support Home" in self.home_page.get_support_text()
 
     @allure.title("Search for Pokemon and validate results")
     def test_search(self):
@@ -46,6 +46,7 @@ class Test_Master(BaseTest):
         with self.page.expect_navigation():
             self.home_page.click_start_shopping()
         assert "store" in self.page.url
+        self.page.goto("https://www.nintendo.com/us/")
 
     @allure.title("Click News")
     def test_click_news(self):

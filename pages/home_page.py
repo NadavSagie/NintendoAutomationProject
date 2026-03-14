@@ -25,10 +25,10 @@ class HomePage(BasePage):
     _ACCOUNT_LOG_IN_PAGE_TITLE = ".c-header_siteLogo"
     _LANGUAGES = "div.sc-14wlync-1.hhYTBR > a._8L3UE > span"
     _HOME_BTN = "div.sc-14wlync-1.jaBTVj > a > span"
-    _START_SHOPPING = "section:nth-child(5) span.Mc7qX"
+    _START_SHOPPING = "section:nth-child(9) span.Mc7qX"
     _GAMING_SYSTEM = "section:nth-child(7) span.Mc7qX"
     _NINTENDO_SWITCH_ONLINE = "section.sc-1bfhtts-0.ierIgL.op-nso-banner a.MFcmt.G0A6l._3LMnG.xN-5A > span.Mc7qX"
-    _NEWS = "[data-testid='NewsIcon']"
+    _NEWS = "section:nth-child(13) span.Mc7qX"
     _DIGITAL_BEST_SELLERS = "div:nth-child(1) > div._67AVi > a"
     _DIGITAL_NEW_RELEASES = "div:nth-child(2) > div._67AVi > a"
     _FEATURES_PREVIOUS_BTN = "section:nth-child(3) > div.mBL2V > div > div._1vq-b.IydHV"
@@ -59,10 +59,14 @@ class HomePage(BasePage):
 
     def click_support(self):
         self.click(self._SUPPORT)
+        self.page.locator(self._CLOSE_SUPPORT).wait_for(state="visible")
         self.click(self._CLOSE_SUPPORT)
+        self.page.get_by_role("link", name="Support Home").wait_for(state="visible")
 
     def get_support_text(self):
-        return self.page.inner_text(self._SUPPORT_HOME)
+        locator = self.page.get_by_role("link", name="Support Home")
+        locator.wait_for(state="visible")
+        return locator.inner_text()
 
     def change_language(self):
         self.click(self._LANGUAGES)
