@@ -1,4 +1,5 @@
 import time
+from time import sleep
 
 from playwright.sync_api import Page
 from pages.base_page import BasePage
@@ -27,7 +28,8 @@ class HomePage(BasePage):
     _HOME_BTN = "div.sc-14wlync-1.jaBTVj > a > span"
     _START_SHOPPING = "section:nth-child(9) span.Mc7qX"
     _GAMING_SYSTEM = "section:nth-child(7) span.Mc7qX"
-    _NINTENDO_SWITCH_ONLINE = "section.sc-1bfhtts-0.ierIgL.op-nso-banner a.MFcmt.G0A6l._3LMnG.xN-5A > span.Mc7qX"
+    _NINTENDO_SWITCH_ONLINE = "section:nth-child(11) .ZovBS"
+    _NINTENDO_SWITCH_ONLINE_VIDEO = ".vjs-big-play-button"
     _NEWS = "section:nth-child(13) span.Mc7qX"
     _DIGITAL_BEST_SELLERS = "div:nth-child(1) > div._67AVi > a"
     _DIGITAL_NEW_RELEASES = "div:nth-child(2) > div._67AVi > a"
@@ -126,6 +128,13 @@ class HomePage(BasePage):
 
     def click_nintendo_switch_online(self):
         self.click(self._NINTENDO_SWITCH_ONLINE)
+
+    def play_nintendo_switch_online_video(self):
+        self.click(self._NINTENDO_SWITCH_ONLINE)
+        self.page.wait_for_selector(self._NINTENDO_SWITCH_ONLINE_VIDEO)
+        self.scroll_page("down", 14, 3000, 0)
+        self.click(self._NINTENDO_SWITCH_ONLINE_VIDEO)
+        sleep(5)
 
     def click_all_news(self):
         self.click(self._NEWS)

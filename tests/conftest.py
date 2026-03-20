@@ -12,7 +12,11 @@ from pages.support import Support
 @pytest.fixture(scope="session")
 def browser():
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, args=["--start-maximized"])
+        browser = p.chromium.launch(
+            channel="chrome",
+            headless=False,
+            args=["--start-maximized", "--autoplay-policy=no-user-gesture-required"]
+        )
         yield browser
         browser.close()
 
