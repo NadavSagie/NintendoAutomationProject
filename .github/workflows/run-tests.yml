@@ -2,6 +2,11 @@ name: Run Nintendo Tests
 
 on:
   workflow_dispatch:
+    inputs:
+      test_path:
+        description: "Pytest path to run"
+        required: false
+        default: "tests/test_master.py"
   push:
     branches: [ main ]
   pull_request:
@@ -29,9 +34,20 @@ jobs:
         run: |
           python -m playwright install --with-deps chromium
 
-      - name: Run tests
+      - name: Set test path
+        id: test_path
         run: |
-          pytest tests/ --alluredir=allure-results
+          if [ -n "${{ github.event.inputs.test_path }}" ]; then
+            echo "value=${{ github.event.inputs.test_path }}" >> $GITHUB_OUTPUT
+          else
+            echo "value=tests/test_master.py" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Run selected tests
+        env:
+          CI: "true"
+        run: |
+          pytest ${{ steps.test_path.outputs.value }} --alluredir=allure-results
 
       - name: Upload Allure results
         if: always()
@@ -39,6 +55,7 @@ jobs:
         with:
           name: allure-results
           path: allure-results
+          if-no-files-found: ignore
 
       - name: Upload screenshots and videos if exist
         if: always()
