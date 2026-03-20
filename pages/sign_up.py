@@ -68,10 +68,7 @@ class SignUp(BasePage):
             self.select_option(self._SIGN_UP_YEAR, year)
             self.click(self._SIGN_UP_SUBMIT)
 
-            self.click(self._NINTENDO_HOME_SIGN_UP)
-            self.click(self._CREATE_NINTENDO_ACCOUNT)
-
-            self.click(age_selector)
+            #self.click(age_selector)
 
             if after_age_choice:
                 after_age_choice()
