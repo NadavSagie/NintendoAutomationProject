@@ -47,6 +47,8 @@ class HomePage(BasePage):
     _SLIDE_SHOW_NEXT = "[aria-label='Next']"
     _SLIDE_SHOW_PREVIOUS = "[aria-label='Previous']"
     _OVERVIEW_TRAILER = "[data-testid='PlayButtonIcon']"
+    _FIRST_SEARCH_ADDITIONAL_RESULTS = ".HCJSl div:nth-child(2) h3"
+    _GAMING_SYSTEM_LEARN_MORE = "div:nth-child(2) > section a:nth-child(1) > .Mc7qX"
 
 
 
@@ -258,10 +260,20 @@ class HomePage(BasePage):
     def slide_show_previous(self):
         self.click(self._SLIDE_SHOW_PREVIOUS)
 
+    def search_gaming_system(self):
+        self.click(self._SEARCH)
+        self.type(self._SEARCH_LINE, "gaming system")
+        self.press(self._SEARCH_LINE, "Enter")
+        self.page.wait_for_selector(self._FIRST_SEARCH_ADDITIONAL_RESULTS)
+        self.scroll_page("down", 50, 3000, 0)
+        self.click(self._FIRST_SEARCH_ADDITIONAL_RESULTS)
+        self.page.locator("#switch-2").get_by_role("link", name="Learn more").click()
+        self.click(self._GAMING_SYSTEM_LEARN_MORE)
+
     def click_overview_trailer(self):
         self.click(self._OVERVIEW_TRAILER)
         frame = self.page.frame_locator("[data-testid='youtubeVid']")
         frame.locator("[aria-label='Play']").click()
-        time.sleep(3)
+        time.sleep(6)
         dialog = self.page.get_by_role("dialog")
         dialog.get_by_label("Close").click()
