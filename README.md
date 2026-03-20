@@ -90,7 +90,7 @@ This project supports running the automated test suite directly through **GitHub
 
 1. Open the repository on GitHub
 2. Go to the **Actions** tab
-3. Select the workflow for this project
+3. 3. Select **Run Nintendo Tests**
 4. Click **Run workflow**
 5. Choose the branch you want to run
 6. Click **Run workflow** again to start execution
@@ -147,17 +147,10 @@ After the workflow finishes:
 
 ---
 
-## 📸 Screenshots (optional)
+## 📸 Reports
 
-*Add sample test screenshots here if needed.*
-
----
-
-## 🤝 Contributing
-
-Pull requests and feedback are welcome!
-For major changes, please open an issue first to discuss what you would like to change.
-
+![img_1.png](img_1.png)
+![img_2.png](img_2.png)
 ---
 
 ## 📄 License
