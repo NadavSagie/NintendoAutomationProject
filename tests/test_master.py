@@ -112,6 +112,6 @@ class Test_Master(BaseTest):
 
     @allure.title("Click Nintendo Switch Online")
     def test_click_nintendo_switch_online_2(self):
-        self.home_page.play_nintendo_switch_online_video()
+        self.home_page.click_nintendo_switch_online_2()
         assert "2" in self.page.url
         self.home_page.click_home_btn()

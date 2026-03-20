@@ -129,6 +129,10 @@ class HomePage(BasePage):
     def click_nintendo_switch_online(self):
         self.click(self._NINTENDO_SWITCH_ONLINE)
 
+    def click_nintendo_switch_online_2(self):
+        self.click(self._NINTENDO_SWITCH_ONLINE)
+        self.scroll_page("down", 50, 6000, 0)
+
     def play_nintendo_switch_online_video(self):
         self.click(self._NINTENDO_SWITCH_ONLINE)
         self.page.wait_for_selector(self._NINTENDO_SWITCH_ONLINE_VIDEO)
