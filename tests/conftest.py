@@ -1,3 +1,4 @@
+import os
 from time import sleep
 import pytest
 from playwright.sync_api import Page, sync_playwright
@@ -12,9 +13,10 @@ from pages.support import Support
 @pytest.fixture(scope="session")
 def browser():
     with sync_playwright() as p:
+        is_ci = os.getenv("CI") == "true"
+
         browser = p.chromium.launch(
-            channel="chrome",
-            headless=False,
+            headless=is_ci,
             args=["--start-maximized", "--autoplay-policy=no-user-gesture-required"]
         )
         yield browser
