@@ -59,29 +59,6 @@ NintendoProject/
 
 ---
 
-## 🚀 How to Run
-
-1. 📦 Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-2. ▶️ Run tests with pytest:
-
-   ```bash
-   pytest tests/
-   ```
-
-3. 📊 (Optional) Generate Allure Report:
-
-   ```bash
-   pytest --alluredir=allure-results
-   allure serve allure-results
-   ```
-
----
-
 ## 🤖 Run Tests with GitHub Actions
 
 This project supports running the automated test suite directly through **GitHub Actions**, so anyone reviewing the repository can execute the tests without installing anything locally.
@@ -128,6 +105,28 @@ After the workflow finishes:
 * Makes the project easier to review and validate
 * Demonstrates CI/CD and test automation skills
 * Allows anyone to run the suite directly from GitHub
+
+---
+## 🚀 How to Run Locally on PyCharm
+
+1. 📦 Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. ▶️ Run tests with pytest:
+
+   ```bash
+   pytest tests/
+   ```
+
+3. 📊 (Optional) Generate Allure Report:
+
+   ```bash
+   pytest --alluredir=allure-results
+   allure serve allure-results
+   ```
 
 ---
 
